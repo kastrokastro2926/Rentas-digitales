@@ -1,12 +1,328 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rentas digitales</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso gratuito: de cero a tu primera renta digital con IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#10182A',
+          inkline: '#26304A',
+          paper: '#EEF2EC',
+          paperline: '#D8DED4',
+          gold: '#C69A3E',
+          pine: '#3E6459',
+          slate: '#4B5568',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          sans: ['"Space Grotesk"', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #EEF2EC; }
+  ::selection { background: #C69A3E; color: #10182A; }
+  .task-label.done { text-decoration: line-through; color: #8A9186; }
+  .video-empty { border-style: dashed !important; opacity: 0.75; }
+  input[type="checkbox"].task-check {
+    appearance: none; -webkit-appearance: none;
+    width: 1.15rem; height: 1.15rem; border: 1.5px solid #4B5568;
+    border-radius: 3px; flex-shrink: 0; cursor: pointer; position: relative; top: 2px;
+  }
+  input[type="checkbox"].task-check:checked {
+    background: #3E6459; border-color: #3E6459;
+  }
+  input[type="checkbox"].task-check:checked::after {
+    content: ''; position: absolute; left: 5px; top: 1px;
+    width: 4px; height: 8px; border: solid white;
+    border-width: 0 2px 2px 0; transform: rotate(45deg);
+  }
+  .week-hidden { display: none !important; }
+  @media (min-width: 1024px) {
+    .side-nav { position: sticky; top: 2rem; height: fit-content; }
+  }
+</style>
 </head>
-<body>
-  <h1>Curso de rentas digitales</h1>
-  <p>Mi página está funcionando.</p>
+<body class="font-sans text-ink antialiased">
+
+<!-- HERO -->
+<header class="bg-ink text-paper">
+  <div class="max-w-5xl mx-auto px-6 pt-14 pb-10">
+    <p class="font-sans text-sm text-gold mb-4">Curso gratuito · autoguiado</p>
+    <h1 class="font-display font-semibold text-4xl md:text-5xl leading-tight max-w-2xl">
+      De cero a tu primera renta digital con IA
+    </h1>
+    <p class="mt-5 max-w-xl text-[#C7CEDB] leading-relaxed">
+      Al final tendrás un MVP de app o herramienta con IA, publicado, con un modelo de suscripción o servicio recurrente, y un plan concreto para conseguir tus primeros clientes.
+    </p>
+
+    <div class="mt-9 flex items-center gap-5 flex-wrap">
+      <div class="flex items-center gap-3">
+        <div class="w-44 h-2 rounded-full bg-[#26304A] overflow-hidden">
+          <div id="progress-bar" class="h-full bg-gold" style="width:0%"></div>
+        </div>
+        <span id="progress-label" class="text-sm text-[#C7CEDB] font-medium whitespace-nowrap">0 de 0 tareas</span>
+      </div>
+      <div class="relative">
+        <input id="search" type="text" placeholder="Buscar en el temario…"
+          class="bg-[#182238] border border-[#324065] text-paper placeholder-[#7C88A6] text-sm rounded px-3 py-2 w-64 focus:outline-none focus:border-gold" />
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-5xl mx-auto px-6 py-10 grid lg:grid-cols-[160px_1fr] gap-10">
+
+  <!-- SIDE NAV -->
+  <nav class="side-nav">
+    <p class="text-xs text-slate mb-3">Semanas</p>
+    <ul id="week-nav" class="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0"></ul>
+  </nav>
+
+  <!-- WEEKS -->
+  <main id="weeks-container" class="space-y-16"></main>
+</div>
+
+<footer class="max-w-5xl mx-auto px-6 pb-16 pt-4 border-t border-paperline">
+  <p class="text-sm text-slate">Tu progreso se guarda automáticamente en este navegador. Los videos sin enlace aún abren una búsqueda en YouTube — reemplázalos por el enlace directo cuando lo tengas.</p>
+</footer>
+
+<script>
+const curso = {
+  titulo: "Curso gratuito: de cero a tu primera renta digital con IA",
+  objetivo: "Al final, tener un MVP de app/herramienta con IA, publicado, con un modelo de suscripción o servicio recurrente, y un plan para conseguir tus primeros clientes.",
+  semanas: [
+    {
+      numero: 0,
+      titulo: "Mentalidad y modelo de negocio",
+      duracion: "2–3 horas",
+      videos: [
+        {
+          titulo: "Curso de Inteligencia Artificial GRATIS – Ganar Dinero con IA",
+          url: "https://www.youtube.com/watch?v=8mHa5LxW6yc",
+          descripcion: "Modelos de negocio y productos digitales con IA."
+        },
+        {
+          titulo: "Curso gratis: Inteligencia Artificial para todos (2026)",
+          url: "https://www.youtube.com/watch?v=DjshEwI6pVk",
+          descripcion: "Fundamentos de IA aplicados a negocios."
+        }
+      ],
+      tareas: [
+        "Define a quién quieres ayudar (coaches, tiendas locales, creadores, etc.)",
+        "Define qué problema concreto les resuelves",
+        "Define cómo vas a cobrar (suscripción mensual, servicio recurrente, etc.)",
+        "Escribe en 1 página tu idea de producto de renta digital (qué hace, para quién, precio aproximado)"
+      ]
+    },
+    {
+      numero: 1,
+      titulo: "Fundamentos de apps con IA sin programar",
+      duracion: "6–8 horas",
+      videos: [
+        {
+          titulo: "Construye y Vende Apps con IA en Minutos! – Curso Completo",
+          url: "",
+          descripcion: "Columna vertebral del curso: panorama completo de apps con IA."
+        },
+        {
+          titulo: "Crea y Vende Apps con IA sin Saber Programar (Desde Cero a Experto)",
+          url: "",
+          descripcion: "Refuerza conceptos y herramientas no-code."
+        }
+      ],
+      tareas: [
+        "Elige 1–2 herramientas de AI coding o no-code (Lovable, Base44, Replit, etc.)",
+        "Crea 2–3 mini-proyectos muy simples solo para familiarizarte",
+        "Define qué tipo de producto harás: herramienta B2B o app de contenido/servicio"
+      ]
+    },
+    {
+      numero: 2,
+      titulo: "Diseñar y construir tu MVP",
+      duracion: "8–12 horas",
+      videos: [
+        {
+          titulo: "Crear una App con IA en 15 Minutos – Copiando una App que gana $40.000/mes",
+          url: "",
+          descripcion: "Proceso completo de idea a app."
+        },
+        {
+          titulo: "Cómo Crear una App con IA (en 10 Minutos) | Base44 Tutorial en Español",
+          url: "",
+          descripcion: "Tutorial concreto de construcción."
+        },
+        {
+          titulo: "Cómo Crear Apps de 500€ hechas con IA en una sola tarde",
+          url: "",
+          descripcion: "Otro flujo de trabajo y herramientas."
+        }
+      ],
+      tareas: [
+        "Define las funciones mínimas de tu MVP (qué debe hacer sí o sí para que alguien pague por ello)",
+        "Construye el MVP: pantallas básicas y lógica principal (qué hace la IA, qué automatiza)",
+        "Prueba internamente: ¿resuelve el problema que prometiste?"
+      ]
+    },
+    {
+      numero: 3,
+      titulo: "Monetización y publicación",
+      duracion: "6–10 horas",
+      videos: [
+        {
+          titulo: "Repasa cómo conectar Stripe y pensar en monetización",
+          url: "",
+          descripcion: "Revisa de nuevo los videos de la semana 2 con foco en la parte de pagos."
+        }
+      ],
+      tareas: [
+        "Decide tu modelo de monetización: suscripción mensual/anual o servicio recurrente",
+        "Configura una página de ventas simple (Notion, Carrd, Framer, etc.)",
+        "Configura un enlace de pago (Stripe, Gumroad, Hotmart, etc.)",
+        "Publica tu MVP como web app (o app móvil si tu herramienta lo justifica)"
+      ]
+    },
+    {
+      numero: 4,
+      titulo: "Conseguir los primeros clientes",
+      duracion: "8–12 horas",
+      videos: [],
+      tareas: [
+        "Crea un portafolio mínimo con 1–3 proyectos (demos o pilotos gratis): problema → solución → resultado",
+        "Haz una lista de 20–30 posibles primeros clientes (negocios locales, conocidos, nichos online)",
+        "Contacta ofreciendo un piloto gratis o con descuento fuerte a cambio de feedback y testimonio",
+        "Itera tu producto con ese feedback"
+      ]
+    },
+    {
+      numero: 5,
+      titulo: "Escalar y sistematizar",
+      duracion: "Opcional, continuo",
+      videos: [],
+      tareas: [
+        "Mejora tu producto con lo aprendido en las semanas anteriores",
+        "Define un proceso claro de onboarding, soporte básico y renovación de suscripciones",
+        "Empieza a crear contenido (TikTok, Reels, Shorts, LinkedIn) mostrando casos de uso, resultados y tu proceso de creación con IA"
+      ]
+    }
+  ]
+};
+
+const STORAGE_KEY = "curso-rentas-digitales-progress";
+const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function youtubeSearchUrl(title) {
+  return "https://www.youtube.com/results?search_query=" + encodeURIComponent(title);
+}
+
+function updateProgress() {
+  const boxes = document.querySelectorAll(".task-check");
+  const total = boxes.length;
+  const done = document.querySelectorAll(".task-check:checked").length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById("progress-bar").style.width = pct + "%";
+  document.getElementById("progress-label").textContent = done + " de " + total + " tareas";
+}
+
+function render() {
+  const nav = document.getElementById("week-nav");
+  const container = document.getElementById("weeks-container");
+
+  curso.semanas.forEach((semana) => {
+    const navItem = document.createElement("li");
+    navItem.innerHTML = `<a href="#semana-${semana.numero}" class="block text-sm text-slate hover:text-ink whitespace-nowrap px-2 py-1 rounded hover:bg-paperline transition-colors">Semana ${semana.numero}</a>`;
+    nav.appendChild(navItem);
+
+    const section = document.createElement("section");
+    section.id = "semana-" + semana.numero;
+    section.dataset.searchable = (semana.titulo + " " + semana.videos.map(v => v.titulo + " " + v.descripcion).join(" ") + " " + semana.tareas.join(" ")).toLowerCase();
+
+    const videosHtml = semana.videos.length ? semana.videos.map((v) => {
+      const hasUrl = !!v.url;
+      const href = hasUrl ? v.url : youtubeSearchUrl(v.titulo);
+      const label = hasUrl ? "Ver video" : "Buscar video";
+      return `
+        <div class="flex items-start justify-between gap-4 py-3 border-t border-paperline">
+          <div>
+            <p class="font-medium text-[15px]">${v.titulo}</p>
+            <p class="text-sm text-slate mt-0.5">${v.descripcion}</p>
+          </div>
+          <a href="${href}" target="_blank" rel="noopener"
+             class="shrink-0 text-sm border ${hasUrl ? 'border-ink' : 'border-slate video-empty'} rounded px-3 py-1.5 hover:bg-ink hover:text-paper transition-colors whitespace-nowrap self-center">
+            ${label}
+          </a>
+        </div>`;
+    }).join("") : "";
+
+    const tareasHtml = semana.tareas.map((t, i) => {
+      const id = `s${semana.numero}-t${i}`;
+      const checked = !!state[id];
+      return `
+        <li class="flex items-start gap-3 py-1.5">
+          <input type="checkbox" class="task-check" id="${id}" ${checked ? "checked" : ""} />
+          <label for="${id}" class="task-label text-[15px] leading-snug ${checked ? "done" : ""}">${t}</label>
+        </li>`;
+    }).join("");
+
+    section.innerHTML = `
+      <div class="flex items-baseline gap-5 mb-1">
+        <span class="font-display text-5xl md:text-6xl text-gold leading-none">${String(semana.numero).padStart(2, "0")}</span>
+        <div>
+          <h2 class="font-display font-semibold text-2xl md:text-[28px]">${semana.titulo}</h2>
+          <p class="text-sm text-slate mt-1">${semana.duracion}</p>
+        </div>
+      </div>
+
+      ${videosHtml ? `<div class="mt-6">${videosHtml}</div>` : ""}
+
+      <div class="mt-6 border-t border-paperline pt-4">
+        <p class="text-sm text-slate mb-2">Tareas</p>
+        <ul>${tareasHtml}</ul>
+      </div>
+    `;
+    container.appendChild(section);
+  });
+
+  document.querySelectorAll(".task-check").forEach((box) => {
+    box.addEventListener("change", () => {
+      state[box.id] = box.checked;
+      box.nextElementSibling.classList.toggle("done", box.checked);
+      saveState();
+      updateProgress();
+    });
+  });
+
+  updateProgress();
+}
+
+function setupSearch() {
+  const input = document.getElementById("search");
+  input.addEventListener("input", () => {
+    const q = input.value.trim().toLowerCase();
+    document.querySelectorAll("#weeks-container section").forEach((section) => {
+      const match = !q || section.dataset.searchable.includes(q);
+      section.classList.toggle("week-hidden", !match);
+    });
+  });
+}
+
+render();
+setupSearch();
+</script>
 </body>
 </html>
